@@ -1,0 +1,19 @@
+name: Build
+run-name: ${{ github.actor }} is building ${{github.repository}}
+on: [ push ]
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.19.0'
+      - name: Installing
+        run: yarn
+      - name: Linting
+        run: yarn run lint
+      - name: Running tests
+        run: yarn run test
+      - name: Building
+        run: yarn run build

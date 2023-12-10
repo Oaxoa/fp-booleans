@@ -1,6 +1,6 @@
 {
   "name": "fp-booleans",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Utilities to apply boolean logic to functions and higher-order functions. Tiny, tested and composable",
   "author": "Pierluigi Pesenti",
   "license": "MIT",

@@ -54,15 +54,30 @@
     "prettier:fix": "prettier --write '**/*.ts'",
     "test": "jest --coverage",
     "test:watch": "jest --watchAll",
-    "build:ts": "tsc --project tsconfig.build.json",
+    "build:ts:cjs": "tsc -p tsconfig.cjs.json",
+    "build:ts:esm": "tsc -p tsconfig.esm.json",
     "clean": "rm -rf ./dist",
-    "build": "yarn clean && yarn build:ts",
+    "build": "yarn clean && yarn build:ts:cjs && yarn build:ts:esm",
     "pack": "yarn --cwd ./dist pack"
   },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
   "exports": {
-    ".": "./dist/index.js",
-    "./not": "./dist/index.js",
-    "./and": "./dist/index.js",
-    "./or": "./dist/index.js"
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./not": {
+      "import": "./dist/esm/feature.js",
+      "require": "./dist/cjs/feature.js"
+    },
+    "./and": {
+      "import": "./dist/esm/feature.js",
+      "require": "./dist/cjs/feature.js"
+    },
+    "./or": {
+      "import": "./dist/esm/feature.js",
+      "require": "./dist/cjs/feature.js"
+    }
   }
 }

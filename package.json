@@ -4,7 +4,6 @@
   "description": "Utilities to apply boolean logic to functions and higher-order functions. Tiny, tested and composable",
   "author": "Pierluigi Pesenti",
   "license": "MIT",
-  "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist/"
@@ -61,7 +60,9 @@
     "pack": "yarn --cwd ./dist pack"
   },
   "exports": {
-    "./*": "./filters/*.js",
-    "./utils": "./utils.js"
+    ".": "./dist/index.js",
+    "./not": "./dist/index.js",
+    "./and": "./dist/index.js",
+    "./or": "./dist/index.js"
   }
 }

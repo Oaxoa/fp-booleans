@@ -39,10 +39,10 @@ const pass = greaterThan100(score);
 const fail = !pass;
 ```
 
-The "!" only works on the boolean value (or equivalent expression), not on the function reference.
+The `!` only works on the boolean value (or equivalent expression), not on the function reference.
 
 In this case we could use `not()` to just reverse the boolean value or expression.
-(nothing fancy here, just equivalent to "!")
+(nothing fancy here, just equivalent to `!`)
 
 ```js
 const fail = not(pass);

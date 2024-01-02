@@ -165,9 +165,9 @@ array.filter(and(gte(MIN_PRICE), not(isRound)));
 array.filter(or(is('admin'), and(startsWith('user_'), isLowerCase)));
 ```
 
-<img src="https://github.com/Oaxoa/fp-filters/raw/master/assets/logo.png" alt="" width="50" /> 
-
-_fp-booleans_ is a core part of [fp-filters](https://github.com/Oaxoa/fp-booleans).
+> [!TIP]
+> <img src="https://github.com/Oaxoa/fp-filters/raw/master/assets/logo.png" alt="" width="50" />
+> _fp-booleans_ is a core part of [fp-filters](https://github.com/Oaxoa/fp-booleans), a curated list of filter functions
 
 ### Getting started
 

@@ -105,8 +105,8 @@ const isBonusScore = score => score % 2 === 0 && score > 0 && score <= 100;
 ```
 
 This code, while still being simple, is hard to read, to test and maintain.
-This kind of code tends to be infused with business logic and be rewritten every time.
-Combining simpler functions would help almost not writing code and ease readability.
+This kind of code tends to be infused with business logic and be rewritten with mild differences in several places.
+Combining simpler functions would help almost not writing code and ease readability using a declarative syntax.
 
 The first step would be to isolate simpler abstract functions:
 

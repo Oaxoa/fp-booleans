@@ -85,7 +85,7 @@ const fail = not(greaterThan(100))(score);
 const fail = not(greaterThan)(100)(score);
 ```
 
-> [TIPNOTE]
+> [!TIP]
 > Being able to move parenthesis around is not for the sake of 🤹 juggling code.<br><br>
 > This flexibility allows to have the complexity (and unit tests) in one single function, _partially apply_ it as much
 > as needed and then applying boolean operations on the specialized function without the need of writing several similar

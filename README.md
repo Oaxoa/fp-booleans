@@ -168,7 +168,7 @@ array.filter(or(is('admin'), and(startsWith('user_'), isLowerCase)));
 
 > [!TIP]
 > <img src="https://github.com/Oaxoa/fp-filters/raw/master/assets/logo.png" alt="" width="50" />
-> _fp-booleans_ is a core part of [fp-filters](https://github.com/Oaxoa/fp-booleans), a curated list of filter functions
+> _fp-booleans_ is a core part of [fp-filters](https://github.com/Oaxoa/fp-filters), a curated list of filter functions
 
 ### Getting started
 

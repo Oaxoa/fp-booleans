@@ -54,11 +54,11 @@ but `not()` proves already useful as it can be used as mapper:
 const flippedValues = [true, false].map(not); // [false, true]
 ```
 
-Now the 🥭 juicy parts:
+Now on the 🥭 **juicy** parts:
 
 #### On boolean predicates
 
-We can use `not()` on a function (boolean predicate) to reverse it and get
+We can use `not()` on a function (boolean predicate) to "reverse" it and get
 a function with the same signature but opposite logic
 
 ```js
@@ -85,10 +85,11 @@ const fail = not(greaterThan(100))(score);
 const fail = not(greaterThan)(100)(score);
 ```
 
-Being able to move parenthesis around is not for the sake of 🤹 juggling code.
+> [!NOTE]
+> Being able to move parenthesis around is not for the sake of 🤹 juggling code.
+
 This flexibility allows to have the complexity (and unit tests) in one single function, _partially apply_ it as much as
-needed and
-then applying boolean operations on the specialized function without the need of writing several similar
+needed and then applying boolean operations on the specialized function without the need of writing several similar
 functions (and testing them).<br><br>
 Imagine if instead than a simple `score > 100` logic in our examples we had a complex function&hellip;
 

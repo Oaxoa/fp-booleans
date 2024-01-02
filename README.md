@@ -85,16 +85,14 @@ const fail = not(greaterThan(100))(score);
 const fail = not(greaterThan)(100)(score);
 ```
 
-> [!NOTE]
-> Being able to move parenthesis around is not for the sake of 🤹 juggling code.
-
-This flexibility allows to have the complexity (and unit tests) in one single function, _partially apply_ it as much as
-needed and then applying boolean operations on the specialized function without the need of writing several similar
-functions (and testing them).<br><br>
-Imagine if instead than a simple `score > 100` logic in our examples we had a complex function&hellip;
-
-Negating it or combining it could require writing several slightly different versions of the logic (that should all be
-unit tested). With `not()` we could avoid code duplication.
+> [TIPNOTE]
+> Being able to move parenthesis around is not for the sake of 🤹 juggling code.<br><br>
+> This flexibility allows to have the complexity (and unit tests) in one single function, _partially apply_ it as much
+> as needed and then applying boolean operations on the specialized function without the need of writing several similar
+> functions (and testing them).<br><br>Imagine if instead than a simple `score > 100` logic in our examples we had a
+> complex function&hellip; <br>Negating it or combining it could require writing several slightly different versions
+> of the logic (that should all be
+> unit tested). With `not()` we can avoid code duplication.
 
 ### `and()`
 

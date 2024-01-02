@@ -117,9 +117,9 @@ const isGreaterThan = compare => n => n > compare;
 const isBetween = (min, max) => isGreaterThan(min) && not(isGreaterThan(max));
 ```
 
-This is a one-time job (or no job at all f you already have them or use some open-source package) and once tested these
-functions are going to be
-bullet-proof.
+> This is a one-time job (or no job at all if you already have them or use some external package) and once tested these
+> functions are going to be
+> bullet-proof.
 
 With these _utils_ in place, we could create one function that combines expressions (booleans) with the `&&` operator,
 but it would require to
@@ -169,14 +169,6 @@ array.filter(or(is('admin'), and(startsWith('user_'), isLowerCase)));
 <img src="https://github.com/Oaxoa/fp-filters/raw/master/assets/logo.png" alt="" width="50" /> 
 
 _fp-booleans_ is a core part of [fp-filters](https://github.com/Oaxoa/fp-booleans).
-
-## Complex combinations
-
-```js
-const complexCombination = not(or(and(gt(10), isEven), or(within(0, 5), isEven)));
-complexCombination(3) // true
-complexCombination(-2) // false
-```
 
 ### Getting started
 

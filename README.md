@@ -5,9 +5,9 @@
 
 A collection of utility functions to apply boolean logic on **functions** (including higher-order):
 
-1. not
-2. and
-3. or
+1. `not()`
+2. `and()`
+3. `or()`
 
 Written (and can be used) in a functional programming style.
 
@@ -27,50 +27,128 @@ With a flexible yet simple API and TS annotations this can be easy too.
 
 ## Examples
 
-### not()
+### `not()`
 
-Imagine we want to 🟢 pass or 🔴 fail a level in a game based on the score being greater than 100:
+##### On boolean values (or expressions)
+
+Imagine we want to pass or fail a level in a game based on the score being greater than 100:
 
 ```js
 const greaterThan100 = (n: number) => n > 100;
 const pass = greaterThan100(score);
-// we could use `not` to just reverse the boolean value or 
-// expression (equivalent to !)
-const fail = not(greaterThan100(score));
-// ...or reverse the function (boolean predicate) and get 
-// a function with the same signature but opposite logic
-const fail = not(greaterThan100)(score)
-// or
-const notGreaterThan100 = not(greaterThan100);
-const fail = notGreaterThan100(score);
+const fail = !pass;
 ```
 
-we could also have a higher-order function that accepts the comparison value and returns a boolean predicate:
+The "!" only works on the boolean value (or equivalent expression), not on the function reference.
+
+In this case we could use `not()` to just reverse the boolean value or expression.
+(nothing fancy here, just equivalent to "!")
 
 ```js
-const greaterThan = (comparison: any) => (arg: any) => arg > comparison;
-// It could be used with several levels of partial application:
-const pass = greaterThan(100)(score)
+const fail = not(pass);
+```
 
-// we could reverse the higher-order function:
-const fail = not(greaterThan)(100)(score);
-// or the partially-applied boolean predicate
-const fail = not(greaterThan(100))(score);
-// or just the boolean value
+but `not()` proves already useful as it can be used as mapper:
+
+```js
+const flippedValues = [true, false].map(not); // [false, true]
+```
+
+Now the 🥭 juicy parts:
+
+#### On boolean predicates
+
+We can use `not()` on a function (boolean predicate) to reverse it and get
+a function with the same signature but opposite logic
+
+```js
+const notGreaterThan100 = not(greaterThan100);
+const fail = notGreaterThan100(score);
+// same as
+const fail = not(greaterThan100)(score)
+```
+
+#### On a higher order functions
+
+The best part is we can also use it on a higher-order function that returns a boolean predicate:
+
+```js
+const greaterThan = (comparison: number) => (arg: number) => arg > comparison;
+
+// we now have several options:
+
+// we could just reverse the boolean value
 const fail = not(greaterThan(100)(score))
+// or the partially-applied HoF (boolean predicate)
+const fail = not(greaterThan(100))(score);
+// or reverse the higher-order function itself
+const fail = not(greaterThan)(100)(score);
 ```
 
 Being able to move parenthesis around is not for the sake of 🤹 juggling code.
-This flexibility allows to have the complexity in one single function, _partially apply_ it in different ways and
-then
-applying boolean operations on the partially-applied function without the need of writing several similar
-functions.<br><br>
-Imagine if instead than a simple `score > 100` logic in our examples we had a complex function&hellip; Negating it or
-combining it could require writing several slightly different versions of the logic.
+This flexibility allows to have the complexity (and unit tests) in one single function, _partially apply_ it as much as
+needed and
+then applying boolean operations on the specialized function without the need of writing several similar
+functions (and testing them).<br><br>
+Imagine if instead than a simple `score > 100` logic in our examples we had a complex function&hellip;
 
-## Negate or combine functions
+Negating it or combining it could require writing several slightly different versions of the logic (that should all be
+unit tested). With `not()` we could avoid code duplication.
 
-_fp-booleans_ functions can be combined to unleash infinite 🚀 power:
+### `and()`
+
+Combining functions is a foundation of functional programming.
+
+Imagine again some code where we are granting a special bonus score based on some logic:
+
+```js
+const isBonusScore = score => score % 2 === 0 && score > 0 && score <= 100;
+```
+
+This code, while still being simple, is hard to read, to test and maintain.
+This kind of code tends to be infused with business logic and be rewritten every time.
+Combining simpler functions would help almost not writing code and ease readability.
+
+The first step would be to isolate simpler abstract functions:
+
+```js
+const isEven = n => n % 2 === 0;
+const isGreaterThan = compare => n => n > compare;
+const isBetween = (min, max) => isGreaterThan(min) && not(isGreaterThan(max));
+```
+
+This is a one-time job (or no job at all f you already have them or use some open-source package) and once tested these
+functions are going to be
+bullet-proof.
+
+With these _utils_ in place, we could create one function that combines expressions (booleans) with the `&&` operator,
+but it would require to
+have a function signature, invoke all functions, and passing the same parameter and would look like:
+
+```js
+const isBonusScore = score => isEven(score) && isBetween(0, 100)(score);
+```
+
+Instead, we could just `and()` (combine the function references) and go point-free.
+
+```js
+const isBonusScore = and(isEven, isBetween(0, 100));
+console.log(isBonusScore(50)); // true
+```
+
+See how combining functions references is more compact than combining expressions in a function?
+
+### `or()`
+
+All we just said about the `and()` function applies here. E.g.:
+
+```js
+const isValid = or(isNegative, isGreaterThan(100));
+```
+
+## All together
+
+_fp-booleans_ functions can be all combined to unleash infinite 🚀 power:
 
 ```js
 not(is(5));

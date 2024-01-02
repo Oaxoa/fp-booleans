@@ -116,6 +116,7 @@ const isGreaterThan = compare => n => n > compare;
 const isBetween = (min, max) => isGreaterThan(min) && not(isGreaterThan(max));
 ```
 
+> [!NOTE]
 > This is a one-time job (or no job at all if you already have them or use some external package) and once tested these
 > functions are going to be
 > bullet-proof.

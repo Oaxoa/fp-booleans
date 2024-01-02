@@ -29,7 +29,7 @@ With a flexible yet simple API and TS annotations this can be easy too.
 
 ### `not()`
 
-##### On boolean values (or expressions)
+#### On boolean values (or expressions)
 
 Imagine we want to pass or fail a level in a game based on the score being greater than 100:
 

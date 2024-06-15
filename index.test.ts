@@ -48,10 +48,7 @@ describe('utils', () => {
 			'higher-order function of any arity',
 			({ higherOrderFunction, left, right, arg, expected }) => {
 				const negatedHigherOrderFunction = not(higherOrderFunction);
-				const appliedNegatedHigherOrderFunction = negatedHigherOrderFunction(
-					left,
-					right
-				);
+				const appliedNegatedHigherOrderFunction = negatedHigherOrderFunction(left, right);
 				expect(appliedNegatedHigherOrderFunction(arg)).toBe(expected);
 			}
 		);

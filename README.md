@@ -3,21 +3,23 @@
 
 # fp-booleans
 
-A collection of utility functions to apply boolean logic on **functions** (including higher-order):
+A collection of utility functions to apply boolean logic **on functions** (including higher-order).
+
+Written (and can be used) in a functional programming style.
+
+> _fp-booleans_ functions are:
+>
+> 1. tiny
+> 1. pure
+> 1. zero-dependencies
+> 1. tree-shakeable
+> 1. 100% tested by design
+
+### Functions
 
 1. `not()`
 2. `and()`
 3. `or()`
-
-Written (and can be used) in a functional programming style.
-
-_fp-booleans_ functions are:
-
-1. pure
-2. tiny
-3. zero-dependencies
-5. tree-shakeable
-6. 100% tested by design
 
 ### Why
 
@@ -79,7 +81,7 @@ const greaterThan = (comparison: number) => (arg: number) => arg > comparison;
 
 // we could just reverse the boolean value
 const fail = not(greaterThan(100)(score))
-// or the partially-applied HoF (boolean predicate)
+// or the boolean predicate (which is a partially-applied HoF)
 const fail = not(greaterThan(100))(score);
 // or reverse the higher-order function itself
 const fail = not(greaterThan)(100)(score);
@@ -89,10 +91,11 @@ const fail = not(greaterThan)(100)(score);
 > Being able to move parenthesis around is not for the sake of 🤹 juggling code.<br><br>
 > This flexibility allows to have the complexity (and unit tests) in one single function, _partially apply_ it as much
 > as needed and then applying boolean operations on the specialized function without the need of writing several similar
-> functions (and testing them).<br><br>Imagine if instead than a simple `score > 100` logic in our examples we had a
+> functions (and testing them, as the partial application is declarative in nature).<br><br>Imagine if instead than a
+> simple `score > 100` logic in our examples we had a
 > complex function&hellip; <br>Negating it or combining it could require writing several slightly different versions
 > of the logic (that should all be
-> unit tested). With `not()` we can avoid code duplication.
+> unit tested). With `not()` we can avoid this duplication.
 
 ### `and()`
 
@@ -152,7 +155,8 @@ _fp-booleans_ functions can be all combined to unleash infinite 🚀 power:
 
 ```js
 not(is(5));
-and(gte(MIN_PRICE), not(isRound));
+not(is)(5);
+and(greaterThanOrEqual(MIN_PRICE), not(isRound));
 or(is('admin'), and(startsWith('user_'), isLowerCase));
 ```
 
@@ -162,7 +166,7 @@ Can be used in filters:
 
 ```js
 array.filter(not(is(5)));
-array.filter(and(gte(MIN_PRICE), not(isRound)));
+array.filter(and(greaterThanOrEqual(MIN_PRICE), not(isRound)));
 array.filter(or(is('admin'), and(startsWith('user_'), isLowerCase)));
 ```
 
@@ -186,9 +190,7 @@ or
 yarn add fp-booleans
 ```
 
-## Contributions
-
-Looking forward for some help.
+## License
 
 [MIT](https://opensource.org/licenses/MIT)
 

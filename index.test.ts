@@ -1,14 +1,16 @@
-import { not, and, or } from './index.js';
+import { not, and, or } from './index';
 
 //some example functions to play around with
 const gt = (comparison: number) => (n: number) => n > comparison;
-const within = (leftBound: number, rightBound: number) => (n: number) =>
-	gt(leftBound)(n) && n < rightBound;
+const within = (leftBound: number, rightBound: number) => (n: number) => gt(leftBound)(n) && n < rightBound;
 const isEven = (n: number) => n % 2 === 0;
-const is = (c: number) => (n: number) => c === n;
+const is =
+	<T>(c: T) =>
+	(n: T) =>
+		c === n;
 const someNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-describe('utils', () => {
+describe('fp-booleans', () => {
 	describe('not()', () => {
 		it.each([
 			{ value: true, expected: false },
@@ -44,24 +46,18 @@ describe('utils', () => {
 				arg: 2,
 				expected: true,
 			},
-		])(
-			'higher-order function of any arity',
-			({ higherOrderFunction, left, right, arg, expected }) => {
-				const negatedHigherOrderFunction = not(higherOrderFunction);
-				const appliedNegatedHigherOrderFunction = negatedHigherOrderFunction(left, right);
-				expect(appliedNegatedHigherOrderFunction(arg)).toBe(expected);
-			}
-		);
+		])('higher-order function of any arity', ({ higherOrderFunction, left, right, arg, expected }) => {
+			const negatedHigherOrderFunction = not(higherOrderFunction);
+			const appliedNegatedHigherOrderFunction = negatedHigherOrderFunction(left, right);
+			expect(appliedNegatedHigherOrderFunction(arg)).toBe(expected);
+		});
 
 		const upTo5 = [1, 2, 3, 4, 5];
 
-		it.each([{ input: someNumbers, expected: upTo5 }])(
-			'inside a filter',
-			({ input, expected }) => {
-				expect(input.filter(not(gt(5)))).toEqual(expected);
-				expect(input.filter(not(gt)(5))).toEqual(expected);
-			}
-		);
+		it.each([{ input: someNumbers, expected: upTo5 }])('inside a filter', ({ input, expected }) => {
+			expect(input.filter(not(gt(5)))).toEqual(expected);
+			expect(input.filter(not(gt)(5))).toEqual(expected);
+		});
 	});
 
 	describe('and()', () => {

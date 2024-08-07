@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+TS update for better inference
+
 ## 0.3.4 - 2024-01-02
 
 ## 0.3.3 - 2023-12-10
@@ -14,5 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 0.3.2 - 2023-12-10
 
 ## 0.3.1 - 2023-12-10
+
 ### Added
+
 - First automated version

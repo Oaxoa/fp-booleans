@@ -1,4 +1,4 @@
-import { not, and, or } from './index';
+import { not, and, or } from './index.js';
 
 //some example functions to play around with
 const gt = (comparison: number) => (n: number) => n > comparison;

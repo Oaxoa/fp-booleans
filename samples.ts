@@ -1,4 +1,6 @@
-import { not, and, or } from './index';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+import {not, and, or} from './index.js';
 
 // Boolean predicates
 const isPositive = (n: number) => n > 0;
@@ -7,9 +9,9 @@ const isEmptyString = (arg: string) => arg === '';
 
 // Higher order functions
 const is =
-	<T>(comparison: T) =>
-	(arg: T) =>
-		arg === comparison;
+    <T>(comparison: T) =>
+        (arg: T) =>
+            arg === comparison;
 
 // SAMPLES
 
@@ -38,7 +40,7 @@ const resultAndOnBooleans = and(true, 1 > 0);
 const isEvenAndPositive = and(isEven, isPositive);
 const resultAndOnBooleanPredicates = isEvenAndPositive(4);
 // when the arity or the types of the functions that we want to combine are different, it should produce a TS error
-const isEvenAndEmptyString = and(isEven, isEmptyString); // <- TS Error
+// const isEvenAndEmptyString = and(isEven, isEmptyString); // <- TS Error
 
 // or()
 //  on booleans
@@ -47,4 +49,4 @@ const resultOrOnBooleans = or(true, 1 < 0);
 const isEvenOrPositive = or(isEven, isPositive);
 const resultOrOnBooleanPredicates = isEvenOrPositive(3);
 // when the arity or the types of the functions that we want to combine are different, it should produce a TS error
-const isEvenOrEmptyString = or(isEven, isEmptyString); // <- TS Error
+// const isEvenOrEmptyString = or(isEven, isEmptyString); // <- TS Error

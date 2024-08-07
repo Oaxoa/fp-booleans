@@ -1,10 +1,10 @@
 // TYPES
 
 type TBooleanPredicate<T extends any[]> = (...params: T) => boolean;
-type THigherOrderBooleanPredicate<U extends any[]> = <T extends any[]>(...params: T) => TBooleanPredicate<T>;
+type THigherOrderBooleanPredicate<U extends any[], T extends any[]> = (...params: U) => TBooleanPredicate<T>;
 
 type TBooleanOrBooleanPredicate = boolean | TBooleanPredicate<any[]>;
-type TNotArg = TBooleanOrBooleanPredicate | THigherOrderBooleanPredicate<any[]>;
+type TNotArg = TBooleanOrBooleanPredicate | THigherOrderBooleanPredicate<any[], any[]>;
 type TBooleanOrBooleanPredicateArray = TBooleanOrBooleanPredicate[];
 
 type TIterateMethod = typeof Array.prototype.every | typeof Array.prototype.some;
@@ -12,7 +12,7 @@ type TIterateMethod = typeof Array.prototype.every | typeof Array.prototype.some
 // UTILS
 
 const isTBooleanPredicate = (
-	arg: TBooleanPredicate<any[]> | THigherOrderBooleanPredicate<any[]>
+	arg: TBooleanPredicate<any[]> | THigherOrderBooleanPredicate<any[], any[]>
 ): arg is TBooleanPredicate<any[]> => typeof arg() === 'boolean';
 
 // IMPLEMENTATION
@@ -25,7 +25,9 @@ const isTBooleanPredicate = (
  */
 export function not(value: boolean): boolean;
 export function not<T extends any[]>(f: TBooleanPredicate<T>): TBooleanPredicate<T>;
-export function not<T extends any[]>(f: THigherOrderBooleanPredicate<T>): THigherOrderBooleanPredicate<T>;
+export function not<U extends any[], T extends any[]>(
+	f: THigherOrderBooleanPredicate<U, T>
+): THigherOrderBooleanPredicate<U, T>;
 export function not<T extends any[]>(arg: TNotArg): TNotArg {
 	if (typeof arg === 'boolean') {
 		return !arg;

@@ -1,6 +1,6 @@
 name: Build
 run-name: ${{ github.actor }} is building ${{github.repository}}
-on: [ push ]
+on: [ push, pull_request ]
 jobs:
   main:
     runs-on: ubuntu-latest

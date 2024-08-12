@@ -21,9 +21,9 @@ const isTBooleanPredicate = (
 
 /**
  * not() can
- * 1. flip a boolean
- * 2. invert the behaviour of a boolean predicate
- * 3. invert the behaviour of a higher-order function that produces a boolean predicate
+ * 1. flip a boolean (e.g.: not(true) -> false)
+ * 2. invert the behaviour of a boolean predicate (e.g.: not(isEven) -> isOdd)
+ * 3. invert the behaviour of a higher-order function that produces a boolean predicate (e.g.: not(is)(5) -> isNot(5))
  */
 export function not(value: boolean): boolean;
 export function not<T extends any[]>(f: TBooleanPredicate<T>): TBooleanPredicate<T>;
@@ -62,9 +62,9 @@ const iterate =
 
 /**
  * and() can:
- * 1. assert the truthiness of all elements in an array of booleans
+ * 1. assert the truthiness of all elements in an array of booleans (e.g.: and(true, false) -> false)
  * 2. construct a composite functions out of a list of boolean predicates with the same signature (arity and types)
- *    where all predicates must succeed
+ *    where all predicates must succeed (e.g.: and(isPositive, isEven) -> isPositiveAndEven)
  */
 export function and(...args: boolean[]): boolean;
 export function and<T extends any[]>(...args: TBooleanPredicate<T>[]): TBooleanPredicate<T>;
@@ -76,9 +76,9 @@ export function and<T extends any[]>(
 
 /**
  * or() can:
- * 1. assert the truthiness of at least one element in an array of booleans
+ * 1. assert the truthiness of at least one element in an array of booleans (e.g.: and(true, false) -> true)
  * 2. construct a composite functions out of a list of boolean predicates with the same signature (arity and types)
- *    where at least one predicate must succeed
+ *    where at least one predicate must succeed (e.g.: or(isPositive, isEven) -> isPositiveOrEven))
  */
 export function or(...args: boolean[]): boolean;
 export function or<T extends any[]>(...args: TBooleanPredicate<T>[]): TBooleanPredicate<T>;

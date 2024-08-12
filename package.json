@@ -66,18 +66,6 @@
     ".": {
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.js"
-    },
-    "./not": {
-      "import": "./dist/esm/feature.js",
-      "require": "./dist/cjs/feature.js"
-    },
-    "./and": {
-      "import": "./dist/esm/feature.js",
-      "require": "./dist/cjs/feature.js"
-    },
-    "./or": {
-      "import": "./dist/esm/feature.js",
-      "require": "./dist/cjs/feature.js"
     }
   }
 }

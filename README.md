@@ -136,7 +136,7 @@ Instead, we could just `and()` (combine the function references) and go point-fr
 
 ```js
 const isBonusScore = and(isEven, isBetween(0, 100));
-console.log(isBonusScore(50)); // true
+isBonusScore(50); // true
 ```
 
 See how combining functions references is more compact than combining expressions in a function?

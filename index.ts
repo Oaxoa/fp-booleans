@@ -1,7 +1,9 @@
 // TYPES
 
-type TBooleanPredicate<T extends any[]> = (...params: T) => boolean;
-type THigherOrderBooleanPredicate<U extends any[], T extends any[]> = (...params: U) => TBooleanPredicate<T>;
+export type TBooleanPredicate<T extends any[]> = (...params: T) => boolean;
+export type THigherOrderBooleanPredicate<U extends any[], T extends any[]> = (
+	...params: U
+) => TBooleanPredicate<T>;
 
 type TBooleanOrBooleanPredicate = boolean | TBooleanPredicate<any[]>;
 type TNotArg = TBooleanOrBooleanPredicate | THigherOrderBooleanPredicate<any[], any[]>;

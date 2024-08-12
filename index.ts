@@ -40,8 +40,6 @@ export function not<T extends any[]>(arg: TNotArg): TNotArg {
 		}
 		return (...higherOrderArgs: any[]) => not(arg(...higherOrderArgs));
 	}
-
-	throw new Error('Unhandled type: ' + typeof arg);
 }
 
 // and() & or() utils
@@ -60,7 +58,6 @@ const iterate =
 			return (...predicatesArgs: any[]) =>
 				method.call(args, (f: TBooleanPredicate<any[]>) => f(...predicatesArgs));
 		}
-		throw new Error('Unhandled type: ' + typeof args);
 	};
 
 /**

@@ -12,10 +12,7 @@
   "include": [
     "./index.ts",
     "./index.test.ts",
-    "./samples.ts",
-    "./jest.config.js",
-    "./prettier.config.js",
-    "./.eslintrc.cjs"
+    "./samples.ts"
   ],
   "exclude": [
     "node_modules"

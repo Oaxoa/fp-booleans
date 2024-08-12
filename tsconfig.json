@@ -5,7 +5,7 @@
     "esModuleInterop": true,
     "declaration": true,
     "outDir": "./dist/esm",
-    "moduleResolution": "node16",
+    "moduleResolution": "Node",
     "strict": false,
     "noImplicitAny": true
   },
@@ -15,7 +15,7 @@
     "./samples.ts",
     "./jest.config.js",
     "./prettier.config.js",
-    "./.eslintrc.cjs"
+    "./eslint.config.js"
   ],
   "exclude": [
     "node_modules"

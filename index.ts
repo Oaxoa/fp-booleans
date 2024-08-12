@@ -1,6 +1,15 @@
 // TYPES
 
+/**
+ * Type representing a function that given any number of parameters of any type returns a boolean
+ * e.g.: TBooleanPredicate<[number]> equals (n: number) => boolean
+ * e.g.: TBooleanPredicate<[number, string]> equals (n: number, str: string) => boolean
+ */
 export type TBooleanPredicate<T extends any[]> = (...params: T) => boolean;
+/**
+ * Type representing a function that given any number of parameters of any type returns a TBoolean<any []>
+ * e.g.: THigherOrderBooleanPredicate<[number, string], [string]> equals (n: number, str: string) => (arg: string) => boolean
+ */
 export type THigherOrderBooleanPredicate<U extends any[], T extends any[]> = (
 	...params: U
 ) => TBooleanPredicate<T>;

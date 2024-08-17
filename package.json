@@ -4,7 +4,7 @@
   "description": "Utilities to apply boolean logic (not, and, or) to functions and higher-order functions. Tiny, tested and composable",
   "author": "Pierluigi Pesenti",
   "license": "MIT",
-  "types": "dist/es/index.d.ts",
+  "types": "./dist/esm/index.d.ts",
   "files": [
     "dist/"
   ],

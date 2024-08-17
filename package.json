@@ -4,7 +4,7 @@
   "description": "Utilities to apply boolean logic (not, and, or) to functions and higher-order functions. Tiny, tested and composable",
   "author": "Pierluigi Pesenti",
   "license": "MIT",
-  "types": "dist/index.d.ts",
+  "types": "dist/es/index.d.ts",
   "files": [
     "dist/"
   ],
@@ -74,7 +74,8 @@
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js"
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/esm/index.d.ts"
     }
   }
 }

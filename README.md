@@ -23,7 +23,7 @@ Written (and can be used) in a functional programming style.
 
 ### Why
 
-Being able to combine or negate booleans, boolean predicate functions and higher-order functions means lots of
+Being able to combine or negate booleans, predicate functions and higher-order predicate functions means lots of
 💪 power.<br>
 With a flexible yet simple API and TS annotations this can be easy too.
 
@@ -31,8 +31,48 @@ With a flexible yet simple API and TS annotations this can be easy too.
 
 ### `not()`
 
+#### On predicates
+
+We can use `not()` on a predicate function to "reverse" it and get
+a function with the same signature but opposite logic
+
+```js
+const notGreaterThan100 = not(greaterThan100);
+const fail = notGreaterThan100(score);
+// same as
+const fail = not(greaterThan100)(score)
+```
+
+#### On a higher order functions
+
+The best part is we can also use it on a higher-order function that returns a predicate:
+
+```js
+const greaterThan = (comparison: number) => (arg: number) => arg > comparison;
+
+// we now have several options:
+
+// we could just reverse the boolean value
+const fail = not(greaterThan(100)(score))
+// or the predicate (which is a partially-applied HoF)
+const fail = not(greaterThan(100))(score);
+// or reverse the higher-order function itself
+const fail = not(greaterThan)(100)(score);
+```
+
+> [!TIP]
+> Being able to move parenthesis around is not for the sake of 🤹 juggling code.<br><br>
+> This flexibility allows to have the complexity (and unit tests) in one single function, _partially apply_ it as much
+> as needed and then applying boolean operations on the specialized function without the need of writing several similar
+> functions (and testing them, as the partial application is declarative in nature).<br><br>Imagine if instead than a
+> simple `score > 100` logic in our examples we had a
+> complex function&hellip; <br>Negating it or combining it could require writing several slightly different versions
+> of the logic (that should all be
+> unit tested). With `not()` we can avoid this duplication.
+
 #### On boolean values (or expressions)
 
+This is the simplest use case:
 Imagine we want to pass or fail a level in a game based on the score being greater than 100:
 
 ```js
@@ -50,52 +90,11 @@ In this case we could use `not()` to just reverse the boolean value or expressio
 const fail = not(pass);
 ```
 
-but `not()` proves already useful as it can be used as mapper:
+but `not()` can also be used as mapper:
 
 ```js
 const flippedValues = [true, false].map(not); // [false, true]
 ```
-
-Now on the 🥭 **juicy** parts:
-
-#### On boolean predicates
-
-We can use `not()` on a function (boolean predicate) to "reverse" it and get
-a function with the same signature but opposite logic
-
-```js
-const notGreaterThan100 = not(greaterThan100);
-const fail = notGreaterThan100(score);
-// same as
-const fail = not(greaterThan100)(score)
-```
-
-#### On a higher order functions
-
-The best part is we can also use it on a higher-order function that returns a boolean predicate:
-
-```js
-const greaterThan = (comparison: number) => (arg: number) => arg > comparison;
-
-// we now have several options:
-
-// we could just reverse the boolean value
-const fail = not(greaterThan(100)(score))
-// or the boolean predicate (which is a partially-applied HoF)
-const fail = not(greaterThan(100))(score);
-// or reverse the higher-order function itself
-const fail = not(greaterThan)(100)(score);
-```
-
-> [!TIP]
-> Being able to move parenthesis around is not for the sake of 🤹 juggling code.<br><br>
-> This flexibility allows to have the complexity (and unit tests) in one single function, _partially apply_ it as much
-> as needed and then applying boolean operations on the specialized function without the need of writing several similar
-> functions (and testing them, as the partial application is declarative in nature).<br><br>Imagine if instead than a
-> simple `score > 100` logic in our examples we had a
-> complex function&hellip; <br>Negating it or combining it could require writing several slightly different versions
-> of the logic (that should all be
-> unit tested). With `not()` we can avoid this duplication.
 
 ### `and()`
 

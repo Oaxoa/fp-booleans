@@ -23,14 +23,14 @@ describe('fp-booleans', () => {
 		it.each([
 			{ predicate: is(5), arg: 5, expected: false },
 			{ predicate: is(5), arg: 6, expected: true },
-		])('boolean predicate', ({ predicate, arg, expected }) => {
+		])('predicate', ({ predicate, arg, expected }) => {
 			expect(not(predicate)(arg)).toBe(expected);
 		});
 		it.each([
 			{ higherOrderFunction: is, curryArg: 5, arg: 5, expected: false },
 			{ higherOrderFunction: is, curryArg: 5, arg: 6, expected: true },
 		])(
-			'higher-order function that returns a boolean predicate',
+			'higher-order function that returns a predicate',
 			({ higherOrderFunction, curryArg, arg, expected }) => {
 				const negatedHigherOrderFunction = not(higherOrderFunction);
 				const appliedNegatedHigherOrderFunction = negatedHigherOrderFunction(curryArg);
@@ -77,7 +77,7 @@ describe('fp-booleans', () => {
 			{ predicates: [gt(0), isEven], arg: 2, expected: true },
 			{ predicates: [gt(0), not(isEven)], arg: 2, expected: false },
 			{ predicates: [gt(4), isEven], arg: 2, expected: false },
-		])('boolean predicate', ({ predicates, arg, expected }) => {
+		])('predicate', ({ predicates, arg, expected }) => {
 			expect(and(...predicates)(arg)).toBe(expected);
 		});
 		it.each([{ input: someNumbers, expected: [6, 8] }])(
@@ -108,7 +108,7 @@ describe('fp-booleans', () => {
 			{ predicates: [gt(0), isEven], arg: 3, expected: true },
 			{ predicates: [gt(0), isEven], arg: -2, expected: true },
 			{ predicates: [gt(0), isEven], arg: -1, expected: false },
-		])('boolean predicate', ({ predicates, arg, expected }) => {
+		])('predicate', ({ predicates, arg, expected }) => {
 			expect(or(...predicates)(arg)).toBe(expected);
 		});
 		it.each([{ input: someNumbers, expected: [2, 4, 6, 7, 8, 9] }])(

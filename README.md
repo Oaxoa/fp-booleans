@@ -31,6 +31,8 @@ With a flexible yet simple API and TS annotations this can be easy too.
 
 ### `not()`
 
+Unary function: accepts boolean, predicate, higher-order predicate.
+
 #### On predicates
 
 We can use `not()` on a predicate function to "reverse" it and get
@@ -97,6 +99,8 @@ const flippedValues = [true, false].map(not); // [false, true]
 ```
 
 ### `and()`
+
+N-ary function.
 
 Combining functions is a foundation of functional programming.
 
@@ -165,13 +169,23 @@ Can be used in filters:
 
 ```js
 array.filter(not(is(5)));
-array.filter(and(greaterThanOrEqual(MIN_PRICE), not(isRound)));
-array.filter(or(is('admin'), and(startsWith('user_'), isLowerCase)));
+array.filter(and(
+    greaterThanOrEqual(MIN_PRICE),
+    not(isRound))
+);
+array.filter(or(
+        is('admin'),
+        and(
+            startsWith('user_'),
+            isLowerCase)
+    )
+);
 ```
 
 > [!TIP]
 > <img src="https://github.com/Oaxoa/fp-filters/raw/master/assets/logo.png" alt="" width="50" />
-> _fp-booleans_ is a core part of [fp-filters](https://github.com/Oaxoa/fp-filters), a curated list of filter functions
+> _fp-booleans_ is used at the core of [fp-filters](https://github.com/Oaxoa/fp-filters), a curated list of filter
+> functions
 
 ### Getting started
 

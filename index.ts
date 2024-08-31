@@ -69,7 +69,7 @@ const iterate =
 
 /**
  * and() can:
- * 1. assert the truthiness of all elements in an array of booleans (e.g.: and(true, false) -> false)
+ * 1. asserts the truth of all elements in an array of booleans (e.g.: and(true, false) -> false)
  * 2. construct a composite functions out of a list of predicates with the same signature (arity and types)
  *    where all predicates must succeed (e.g.: and(isPositive, isEven) -> isPositiveAndEven)
  */
@@ -81,7 +81,7 @@ export function and<T extends any[]>(...args: TBooleanOrPredicateArray): boolean
 
 /**
  * or() can:
- * 1. assert the truthiness of at least one element in an array of booleans (e.g.: and(true, false) -> true)
+ * 1. asserts the truth of at least one element in an array of booleans (e.g.: and(true, false) -> true)
  * 2. construct a composite functions out of a list of predicates with the same signature (arity and types)
  *    where at least one predicate must succeed (e.g.: or(isPositive, isEven) -> isPositiveOrEven))
  */

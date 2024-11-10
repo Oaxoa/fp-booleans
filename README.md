@@ -15,7 +15,7 @@ Written (and can be used) in a functional programming style.
 > 1. Tree-shakeable
 > 1. Fully tested by design
 
-### Functions
+## Functions
 
 1. `not()`
 2. `and()`
@@ -27,13 +27,13 @@ Being able to combine or negate booleans, predicate functions and higher-order p
 💪 power.<br>
 With a flexible yet simple API and TS annotations this can be easy too.
 
-## Examples
+### Examples
 
-### `not()`
+#### `not()`
 
 Unary function: accepts boolean, predicate, higher-order predicate.
 
-#### On predicates
+##### On predicates
 
 We can use `not()` on a predicate function to "reverse" it and get
 a function with the same signature but opposite logic
@@ -45,7 +45,7 @@ const fail = notGreaterThan100(score);
 const fail = not(greaterThan100)(score)
 ```
 
-#### On a higher order functions
+##### On a higher order functions
 
 The best part is we can also use it on a higher-order function that returns a predicate:
 
@@ -72,7 +72,7 @@ const fail = not(greaterThan)(100)(score);
 > of the logic (that should all be
 > unit tested). With `not()` we can avoid this duplication.
 
-#### On boolean values (or expressions)
+##### On boolean values (or expressions)
 
 This is the simplest use case:
 Imagine we want to pass or fail a level in a game based on the score being greater than 100:
@@ -102,7 +102,7 @@ const flippedValues = [true, false].map(not); // [false, true]
 const flippedValues = [true, false].map(not as (value: boolean) => boolean); // [false, true]
 ```
 
-### `and()`
+#### `and()`
 
 N-ary function.
 
@@ -148,7 +148,7 @@ isBonusScore(50); // true
 
 See how combining functions references is more compact than combining expressions in a function?
 
-### `or()`
+#### `or()`
 
 What just described about the `and()` function applies to `or()`. E.g.:
 
@@ -156,7 +156,7 @@ What just described about the `and()` function applies to `or()`. E.g.:
 const isValid = or(isNegative, isGreaterThan(100));
 ```
 
-## All together
+#### All together
 
 _fp-booleans_ functions can be all combined to unleash infinite 🚀 power:
 
@@ -167,7 +167,7 @@ and(greaterThanOrEqual(MIN_PRICE), not(isRound));
 or(is('admin'), and(startsWith('user_'), isLowerCase));
 ```
 
-## Used in filters
+#### Used in filters
 
 Can be used in filters:
 
@@ -198,6 +198,9 @@ Two more utils functions are exported:
 1. `isPredicate`
 1. `isHigherOrderPredicate`
 
+they can check if a function is a predicate (returns boolean) or is a higher-order predicate (a function that when
+invoked returns a predicate).
+
 #### Examples
 
 ```ts
@@ -205,9 +208,9 @@ isPredicate(someFunction);
 isHigherOrderPredicate(someFunction);
 ```
 
-### Getting started
+## Getting started
 
-#### Installation
+### Installation
 
 _fp-booleans_ runs on Node.js and is available as a NPM package.
 

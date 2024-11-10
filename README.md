@@ -191,6 +191,20 @@ array.filter(or(
 > _fp-booleans_ is used at the core of [fp-filters](https://github.com/Oaxoa/fp-filters), a curated list of filter
 > functions. Check it, and you may never have to write another filter function 🚀!
 
+### Additional Exports
+
+Two more utils functions are exported:
+
+1. `isPredicate`
+1. `isHigherOrderPredicate`
+
+#### Examples
+
+```ts
+isPredicate(someFunction);
+isHigherOrderPredicate(someFunction);
+```
+
 ### Getting started
 
 #### Installation

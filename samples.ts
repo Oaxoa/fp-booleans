@@ -15,7 +15,6 @@ const is =
         (arg: T) =>
             arg === comparison;
 
-
 /* SAMPLES */
 
 /* not() */

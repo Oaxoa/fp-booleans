@@ -49,6 +49,7 @@
   "type": "module",
   "repository": "https://github.com/Oaxoa/fp-booleans",
   "devDependencies": {
+    "@eslint/js": "9.9.1",
     "@types/jest": "29.5.12",
     "eslint": "9.9.1",
     "eslint-config-prettier": "9.1.0",
@@ -58,20 +59,19 @@
     "prettier": "3.3.3",
     "ts-jest": "29.2.5",
     "typescript": "5.5.4",
-    "@eslint/js": "9.9.1",
     "typescript-eslint": "8.3.0"
   },
   "scripts": {
-    "lint": "eslint .",
-    "prettier": "prettier '**/*.ts'",
-    "prettier:fix": "prettier --write '**/*.ts'",
-    "test": "jest --coverage",
-    "test:watch": "jest --watchAll",
+    "build": "yarn clean && yarn build:ts:cjs && yarn build:ts:esm",
     "build:ts:cjs": "tsc -p tsconfig.cjs.json",
     "build:ts:esm": "tsc -p tsconfig.esm.json",
     "clean": "rm -rf ./dist",
-    "build": "yarn clean && yarn build:ts:cjs && yarn build:ts:esm",
-    "pack": "yarn --cwd ./dist pack"
+    "lint": "eslint .",
+    "pack": "yarn --cwd ./dist pack",
+    "prettier": "prettier '**/*.ts'",
+    "prettier:fix": "prettier --write '**/*.ts'",
+    "test": "jest --coverage",
+    "test:watch": "jest --watchAll"
   },
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",

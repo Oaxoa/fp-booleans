@@ -9,11 +9,11 @@ Written (and can be used) in a functional programming style.
 
 > _fp-booleans_ functions are:
 >
-> 1. tiny
-> 1. pure
-> 1. zero-dependencies
-> 1. tree-shakeable
-> 1. 100% tested by design
+> 1. Small
+> 1. Pure
+> 1. Zero-dependencies
+> 1. Tree-shakeable
+> 1. Fully tested by design
 
 ### Functions
 
@@ -98,6 +98,10 @@ but `not()` can also be used as mapper:
 const flippedValues = [true, false].map(not); // [false, true]
 ```
 
+```ts
+const flippedValues = [true, false].map(not as (value: boolean) => boolean); // [false, true]
+```
+
 ### `and()`
 
 N-ary function.
@@ -114,7 +118,7 @@ This code, while still being simple, is hard to read, to test and maintain.
 This kind of code tends to be infused with business logic and be rewritten with mild differences in several places.
 Combining simpler functions would help almost not writing code and ease readability using a declarative syntax.
 
-The first step would be to isolate simpler abstract functions:
+The first step would be to isolate the logic into simpler functions:
 
 ```js
 const isEven = n => n % 2 === 0;
@@ -146,7 +150,7 @@ See how combining functions references is more compact than combining expression
 
 ### `or()`
 
-All we just said about the `and()` function applies here. E.g.:
+What just described about the `and()` function applies to `or()`. E.g.:
 
 ```js
 const isValid = or(isNegative, isGreaterThan(100));
@@ -185,7 +189,7 @@ array.filter(or(
 > [!TIP]
 > <img src="https://github.com/Oaxoa/fp-filters/raw/master/assets/logo.png" alt="" width="50" />
 > _fp-booleans_ is used at the core of [fp-filters](https://github.com/Oaxoa/fp-filters), a curated list of filter
-> functions
+> functions. Check it, and you may never have to write another filter function 🚀!
 
 ### Getting started
 
@@ -207,4 +211,4 @@ yarn add fp-booleans
 
 [MIT](https://opensource.org/licenses/MIT)
 
-Copyright (c) 2023-present, Pierluigi Pesenti (Oaxoa)
+Copyright (c) 2023-present, Pierluigi Pesenti

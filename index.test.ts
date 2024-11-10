@@ -62,6 +62,13 @@ describe('fp-booleans', () => {
 				expect(input.filter(not(gt(5)))).toEqual(expected);
 				expect(input.filter(not(gt)(5))).toEqual(expected);
 			});
+
+			it.each([{ input: [false, true, false, true], expected: [true, false, true, false] }])(
+				'as a mapper',
+				({ input, expected }) => {
+					expect(input.map(not as (value: boolean) => boolean)).toEqual(expected);
+				}
+			);
 		});
 
 		describe('and()', () => {

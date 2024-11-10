@@ -20,9 +20,53 @@ type TIterateMethod = typeof Array.prototype.every | typeof Array.prototype.some
 
 // UTILS
 
-const isPredicate = (
+/** Checking at runtime if a function is a predicate is difficult without parsing it.
+ The only way is to invoke it and check the type of the return value to be boolean.
+ To be able to invoke any function of any arity and arguments type, the only option invoke it without passing arguments.
+ Therefore, the predicate being tested must be resilient to be invoked without arguments.
+
+ Example:
+ BAD ❌ const hasLengthGreaterThanZero = (argument: string) => argument.length > 0;
+ Invoking it without arguments would throw "Cannot read properties of undefined (reading 'length')"
+ GOOD ✅ const hasLengthGreaterThanZero = (argument: string) => argument?.length > 0;
+
+ The return value being true or false, wrong or right, is not important. Must be a boolean and don't throw errors
+ when invoked without arguments.
+ */
+export const isPredicate = (
 	arg: TPredicate<any[]> | THigherOrderPredicate<any[], any[]>
-): arg is TPredicate<any[]> => typeof arg() === 'boolean';
+): arg is TPredicate<any[]> => {
+	if (typeof arg !== 'function') {
+		return false;
+	}
+	let result;
+	try {
+		result = arg();
+	} catch (e) {
+		throw new Error(
+			`The argument predicate must be resilient to be invoked without parameters. Original error: ${e.message}`
+		);
+	}
+	return typeof result === 'boolean';
+};
+
+export const isHigherOrderPredicate = (
+	arg: TPredicate<any[]> | THigherOrderPredicate<any[], any[]>
+): arg is THigherOrderPredicate<any[], any[]> => {
+	if (typeof arg !== 'function') {
+		return false;
+	}
+	let partiallyApplied;
+	try {
+		partiallyApplied = arg() as TPredicate<any[]>;
+	} catch (e) {
+		throw new Error(
+			`The argument predicate must be resilient to be invoked without parameters. Original error: ${e.message}`
+		);
+	}
+
+	return isPredicate(partiallyApplied);
+};
 
 // IMPLEMENTATION
 
@@ -37,7 +81,7 @@ export function not<T extends any[]>(f: TPredicate<T>): TPredicate<T>;
 export function not<U extends any[], T extends any[]>(
 	f: THigherOrderPredicate<U, T>
 ): THigherOrderPredicate<U, T>;
-export function not<T extends any[]>(arg: TNotArg): TNotArg {
+export function not<T extends any[], U extends any[]>(arg: TNotArg): TNotArg {
 	if (typeof arg === 'boolean') {
 		return !arg;
 	}
@@ -45,7 +89,14 @@ export function not<T extends any[]>(arg: TNotArg): TNotArg {
 		if (isPredicate(arg)) {
 			return (...args: T) => !arg(...args);
 		}
-		return (...higherOrderArgs: any[]) => not(arg(...higherOrderArgs));
+
+		if (isHigherOrderPredicate(arg)) {
+			return (...higherOrderArgs: U) => not(arg(...higherOrderArgs));
+		}
+
+		throw new Error(
+			`Argument Error: The argument must be a boolean, a predicate or a higher-order predicate`
+		);
 	}
 }
 

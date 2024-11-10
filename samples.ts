@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import {not, and, or} from './index.js';
+import { not, and, or } from './index.js';
 
 /* SOME EXAMPLE FUNCTIONS */
 
@@ -11,9 +11,9 @@ const isEmptyString = (arg: string) => arg === '';
 
 // Higher order functions
 const is =
-    <T>(comparison: T) =>
-        (arg: T) =>
-            arg === comparison;
+	<T>(comparison: T) =>
+	(arg: T) =>
+		arg === comparison;
 
 /* SAMPLES */
 

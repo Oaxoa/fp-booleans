@@ -4,10 +4,13 @@
   "description": "Utilities to apply boolean logic (not, and, or) to functions and higher-order functions. Tiny, tested and composable",
   "author": "Pierluigi Pesenti",
   "license": "MIT",
-  "types": "./dist/esm/index.d.ts",
+  "type": "module",
   "files": [
     "dist/"
   ],
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
   "keywords": [
     "not",
     "and",
@@ -50,7 +53,6 @@
     "code-simplification",
     "functional utilities"
   ],
-  "type": "module",
   "repository": "https://github.com/Oaxoa/fp-booleans",
   "devDependencies": {
     "@eslint/js": "9.9.1",
@@ -76,14 +78,5 @@
     "prettier:fix": "prettier --write '**/*.ts'",
     "test": "jest --coverage",
     "test:watch": "jest --watchAll"
-  },
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
-  "exports": {
-    ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js",
-      "types": "./dist/esm/index.d.ts"
-    }
   }
 }
